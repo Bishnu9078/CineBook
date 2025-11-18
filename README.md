@@ -1,7 +1,4 @@
-Here is your **Highly Visual, Badge-Loaded, Premium GitHub-Optimized README** —
-clean, stylish, attractive, and perfectly formatted for GitHub.
 
-Just **copy & paste** into your README.md.
 
 ---
 
@@ -167,12 +164,3 @@ The **Cinema Ticket Booking System** is a fully functional, visually modern web 
 A complete end-to-end booking experience built from scratch.
 
 ---
-
-If you want this with:
-
-🎨 A custom banner
-🎟 A BookMyShow-style theme
-⚫ A premium dark-mode header
-📘 A PDF or DOCX export
-
-Just tell me — I can generate it!
