@@ -1,179 +1,179 @@
-🎬 Cinema Ticket Booking System
+Got it — your README is **not rendering professionally on GitHub** because:
 
-A Full-Stack Java Web Application for Seamless Movie Ticket Reservations
+### ✅ GitHub does NOT support emojis inside headings like this:
 
-🧩 Overview
+```
+## 🎬 **Cinema Ticket Booking System**
+```
 
-The Cinema Ticket Booking System simplifies the movie ticket reservation process by digitizing every step — from movie selection to ticket generation.
-It replicates real-world platforms like BookMyShow, developed completely using JSP, Servlets, and MySQL.
+### ❌ Also GitHub does NOT style headings well when bold (`**`) is inside them.
+
+### ❌ Subheadings with emojis before them sometimes break alignment.
+
+### ❌ Extra HTML-like spacing causes inconsistent formatting.
+
+---
+
+# ✅ I will give you a **Professional, Clean, GitHub-Perfect README**
+
+No rendering issues
+No alignment issues
+No bold-inside-heading issues
+Emojis used safely
+Headings clean and uniform
+Spacing optimized for GitHub
+
+---
+
+# 🎬 Cinema Ticket Booking System
+
+*A Full-Stack Java Web Application for Seamless Movie Ticket Reservations*
+
+---
+
+## 🧩 Overview
+
+The **Cinema Ticket Booking System** is a full-stack web application that digitizes the movie ticket reservation process — from movie selection to payment and ticket generation.
+It replicates functionality similar to **BookMyShow**, built entirely using **JSP**, **Servlets**, and **MySQL**.
 
 This project includes:
 
-Backend workflow using Java Servlets + JDBC
+* Java Servlets + JDBC backend
+* JSP-based dynamic UI
+* Razorpay Payment Integration
+* Session & booking management
 
-Dynamic UI rendering through JSP
+---
 
-Secure online payments with Razorpay API
+## 💡 Motivation
 
-Database-driven session and booking management
+This project is designed to:
 
-💡 Motivation
+* Demonstrate Java EE and MVC architecture
+* Build a modular and scalable backend
+* Integrate Razorpay for real payment flow
+* Improve MySQL relational query handling
 
-Traditional movie booking systems are manual, time-consuming, or partially automated.
-This system was built to:
+The aim was to create a professional, maintainable, production-style ticket booking application.
 
-Demonstrate practical Java EE & MVC architecture
+---
 
-Build a modular, scalable backend
+## ⚙️ Key Features
 
-Integrate third-party APIs like Razorpay
+### User Features
 
-Strengthen MySQL relational database design
+* Login / Registration (MySQL Auth)
+* Browse movies and showtimes
+* Interactive seat selection
+* Built-in date selection
+* Auto price calculation
+* Razorpay payment gateway
+* PDF ticket download
 
-The result is a clean, maintainable, and production-style system.
+### Admin Features
 
-⚙️ Key Features
-🎟 User Module
+* Add / update movies and showtimes
+* Manage theaters and pricing
+* View all bookings
+* Monitor real-time seat availability
 
-MySQL-based Login / Registration
+---
 
-Dynamic movie & showtime listing
+## 💳 Payment Integration
 
-Interactive seat selection interface
+* Razorpay API (Test Mode)
+* Unique order_id generation
+* Payment status verification
+* Secure backend flow
 
-Built-in date picker for booking
+---
 
-Auto-calculated ticket price
+## 📅 Calendar Booking
 
-Razorpay payment integration
+* Users select dates through a calendar component
+* Selected date flows across all booking steps
+* Stored in database under `booking_date`
 
-Downloadable PDF Ticket
+---
 
-🧑‍💼 Admin Module
+## 🚀 How It Works
 
-Add / Update / Delete movies & showtimes
+1. User logs in
+2. User selects movie
+3. Seats are selected from an interactive grid
+4. User selects a date
+5. Payment initiated using Razorpay
+6. Booking stored in DB
+7. Ticket is generated in PDF
 
-Manage ticket pricing & theaters
+---
 
-View all bookings + payments
+## 🧠 What I Learned
 
-Monitor real-time seat status
+* Java Servlet lifecycle (`doGet`, `doPost`)
+* JSP + JSTL
+* Session handling
+* Prepared statements and SQL integration
+* Razorpay payment workflow
+* Real-time seat management
+* Exception handling & redirects
 
-💰 Payment Integration
+---
 
-Integrated with Razorpay API (Test Mode)
+## 🧰 Technologies Used
 
-Generates unique order_id
+### Frontend
 
-Validates payment success
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+* JSP
 
-Ensures secure transaction flow
+### Backend
 
-📅 Calendar Booking
+* Java Servlets
+* JDBC
+* JSP
+* Razorpay Java SDK
 
-Users can select desired show dates directly from booking_admin.jsp
+### Database
 
-The selected date flows through payment → confirmation → ticket
+* MySQL
+* Tables: `users`, `movies`, `booking`, `booked_seats`
 
-Stored in database under booking_date column
+### Tools
 
-🚀 How It Works
+* Eclipse / STS
+* Tomcat 9
+* MySQL Workbench
+* Git / GitHub
 
-User Login / Registration
+---
 
-Movie Selection from database
+## 📈 Future Enhancements
 
-Seat Selection (JSP-generated grid)
+* JWT authentication
+* QR-code on tickets
+* Email ticket delivery
+* Admin analytics dashboard
+* Move to Spring Boot (REST API)
+* UI upgrade to React
 
-Date Selection using calendar widget
+---
 
-Payment initiated via Razorpay
+## 🏁 Conclusion
 
-Booking Confirmation stored in DB
+The **Cinema Ticket Booking System** is a fully functional, production-style web application integrating backend, frontend, database, and payment gateway workflows.
+It automates the entire ticket booking lifecycle while maintaining scalability and a smooth user experience.
 
-Ticket Generated (PDF)
+---
 
-💾 Data Flow Diagram
-User Workflow
+# ✅ If you want, I can also generate:
 
-Login → Movie Selection → Seat Selection → Payment → Ticket PDF
+✔ A **Minimalist White Theme README**
+✔ A **Premium Dark Theme README**
+✔ A **BookMyShow-style README**
+✔ A **Highly Visual README with Badges and Icons**
 
-Admin Workflow
-
-Dashboard → Movie/Showtime Management → Booking Overview
-
-🧠 Learning Outcomes
-
-This project helped master:
-
-Servlet lifecycle (init, doGet, doPost)
-
-Session management & request forwarding
-
-JSP scripting, JSTL & MVC
-
-MySQL JDBC prepared statements
-
-Third-party API integration (Razorpay)
-
-Exception handling & redirects
-
-Real-time seat state management
-
-🧰 Technologies Used
-Frontend
-
-HTML5
-
-CSS3
-
-Bootstrap 5
-
-JavaScript
-
-JSP
-
-Backend
-
-Java Servlets
-
-JSP
-
-JDBC
-
-Razorpay Java SDK
-
-Database
-
-MySQL
-
-Tables: users, movies, booking, booked_seats
-
-Tools
-
-Eclipse / STS
-
-Apache Tomcat 9
-
-MySQL Workbench
-
-Git & GitHub
-
-📈 Future Enhancements
-
-JWT Authentication
-
-QR-coded tickets
-
-Email ticket delivery (SMTP)
-
-Admin analytics dashboard
-
-Migration to Spring Boot + REST API
-
-UI enhancement using React / Angular
-
-🏁 Conclusion
-
-The Cinema Ticket Booking System is a complete, production-style web application integrating frontend, backend, payment gateway, and database technology.
-It automates the end-to-end ticket booking lifecycle, ensuring reliability, scalability, and a seamless user experience.
+Just tell me!
