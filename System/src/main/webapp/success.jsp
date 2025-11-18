@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+
+<%
+    // ✅ Fetch booking ID from session or request
+    String bookingIdParam = request.getParameter("booking_id");
+    HttpSession sess = request.getSession(false);
+    int bookingId = 0;
+
+    if (bookingIdParam != null && !bookingIdParam.trim().isEmpty()) {
+        bookingId = Integer.parseInt(bookingIdParam);
+    } else if (sess != null && sess.getAttribute("booking_id") != null) {
+        bookingId = Integer.parseInt(sess.getAttribute("booking_id").toString());
+    }
+
+    if (bookingId == 0) {
+        out.println("<h3 style='color:red;text-align:center;'>Invalid or Missing Booking ID</h3>");
+        return;
+    }
+
+    // ✅ Variables for ticket info
+    int userId = 0;
+    String theater = "-", seats = "-", bookingDate = "-", showTime = "-";
+    double totalPrice = 0.0;
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/cinema_db", "root", "Bishnu@068"
+        );
+
+        PreparedStatement ps = conn.prepareStatement(
+            "SELECT user_id, theater_name, seats, booking_date, show_time, total_price FROM booking WHERE booking_id=?"
+        );
+        ps.setInt(1, bookingId);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            userId = rs.getInt("user_id");
+            theater = rs.getString("theater_name");
+            seats = rs.getString("seats");
+            bookingDate = rs.getString("booking_date");
+            showTime = rs.getString("show_time");
+            totalPrice = rs.getDouble("total_price");
+        }
+
+        conn.close();
+    } catch (Exception e) {
+        out.println("<pre style='color:red;'>");
+        e.printStackTrace(new java.io.PrintWriter(out));
+        out.println("</pre>");
+    }
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Booking Success - Cinema Book</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body {
+    background-color: #f4f7fa;
+    font-family: 'Poppins', sans-serif;
+}
+.ticket-card {
+    max-width: 520px;
+    margin: 100px auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    text-align: center;
+}
+.ticket-card h3 {
+    color: #e50914;
+    font-weight: 700;
+}
+.ticket-card hr {
+    margin: 20px 0;
+}
+.ticket-card p {
+    margin: 8px 0;
+    font-size: 15px;
+}
+.success {
+    color: #087f23;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.btn-custom {
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 8px;
+    padding: 10px 20px;
+}
+</style>
+</head>
+
+<body>
+<div class="ticket-card" id="ticket">
+    <h3>🎟️ Cinema Ticket</h3>
+    <hr>
+    <p><strong>User ID:</strong> <%= userId %></p>
+    <p><strong>Booking ID:</strong> <%= bookingId %></p>
+    <p><strong>Theater:</strong> <%= theater %></p>
+    <p><strong>Seats:</strong> <%= seats %></p>
+    <p><strong>Date:</strong> <%= bookingDate %></p>
+    <p><strong>Show Time:</strong> <%= showTime %></p>
+    <p><strong>Total:</strong> ₹<%= totalPrice %></p>
+    <hr>
+    <p class="success">✅ Booking Confirmed</p>
+
+    <form action="HomeRedirectServlet" method="post">
+        <button type="button" class="btn btn-success btn-custom" onclick="downloadTicket()">⬇️ Download Ticket</button>
+        <input type="hidden" name="redirectPage" value="userDashboard.jsp">
+        <button type="submit" class="btn btn-primary btn-custom">🏠 Back to Dashboard</button>
+    </form>
+</div>
+
+<script>
+function downloadTicket() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+
+    // 🎨 Header
+    pdf.setFillColor(229, 9, 20);
+    pdf.rect(0, 0, 210, 25, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(20);
+    pdf.text("🎟 Cinema Ticket", 70, 17);
+
+    // 🧾 Ticket Info
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(13);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("Booking Details", 20, 40);
+    pdf.setFont("helvetica", "normal");
+    pdf.line(20, 42, 80, 42);
+
+    pdf.text(`User ID: <%= userId %>`, 20, 55);
+    pdf.text(`Booking ID: <%= bookingId %>`, 20, 65);
+    pdf.text(`Theater: <%= theater %>`, 20, 75);
+    pdf.text(`Seats: <%= seats %>`, 20, 85);
+    pdf.text(`Date: <%= bookingDate %>`, 20, 95);
+    pdf.text(`Show Time: <%= showTime %>`, 20, 105);
+    pdf.text(`Total Amount: ₹<%= totalPrice %>`, 20, 115);
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setTextColor(8, 127, 35);
+    pdf.text("✅ Booking Confirmed", 20, 135);
+
+    // 🖨 Footer
+    pdf.setFontSize(10);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text("Generated by Cinema Booking System", 60, 280);
+
+    pdf.save("Cinema_Ticket_<%= bookingId %>.pdf");
+}
+</script>
+</body>
+</html>
